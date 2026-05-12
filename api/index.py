@@ -17,33 +17,55 @@ def webhook():
         text = (msg.get("text") or "").strip()
 
         if text == "/start" and chat_id:
-            payload = {
+            # ═══════════════════════════════════════
+            # 1. PREMIUM PHOTO with stylish caption
+            # ═══════════════════════════════════════
+            photo_caption = (
+                "✨ **RK | CryptoMines** ✨\n"
+                "▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔\n"
+                "🎰 *Premium Casino Experience*\n"
+                "💎 `Mines Game` — Win Real USDT\n\n"
+                "⛏️ Find gems, dodge bombs\n"
+                "📈 Multiply your bet instantly\n"
+                "🔹 Minimum Deposit: **10 USDT**\n"
+                "🔹 Network: *BNB Smart Chain (BEP20)*\n"
+                "🔹 Secure | Fair | Instant\n\n"
+                "👇 Follow the steps below to play!"
+            )
+            requests.post(f"{TELEGRAM_API}/sendPhoto", json={
                 "chat_id": chat_id,
                 "photo": PHOTO_URL,
-                "caption": (
-                    "🎰 **RK | CryptoMines**\n"
-                    "▔▔▔▔▔▔▔▔▔▔▔▔▔▔\n"
-                    "💎 *Real Crypto Mines Game*\n"
-                    "⛏️ Find diamonds, avoid bombs\n"
-                    "💰 Win USDT by playing!\n"
-                    "📌 Minimum Deposit: 10 USDT\n"
-                    "🔗 BNB Smart Chain (BEP20)\n\n"
-                    "👇 Tap the button below to play!"
-                ),
+                "caption": photo_caption,
+                "parse_mode": "Markdown"
+            })
+
+            # ═══════════════════════════════════════
+            # 2. SEPARATE MESSAGE with Game Button
+            # ═══════════════════════════════════════
+            premium_text = (
+                "🌟 **Ready to Start?** 🌟\n\n"
+                "Tap the glowing button below to launch your personal casino table.\n"
+                "▸ Instant gameplay\n"
+                "▸ Real USDT rewards\n"
+                "▸ No limits\n\n"
+                "⚡ _Powered by RK | CryptoMines_"
+            )
+            requests.post(f"{TELEGRAM_API}/sendMessage", json={
+                "chat_id": chat_id,
+                "text": premium_text,
                 "parse_mode": "Markdown",
                 "reply_markup": {
                     "inline_keyboard": [[{
-                        "text": "🎮 Launch Game",
+                        "text": "🎮 LAUNCH GAME 🎮",
                         "web_app": {"url": GAME_URL}
                     }]]
                 }
-            }
-            requests.post(f"{TELEGRAM_API}/sendPhoto", json=payload)
+            })
 
         return jsonify({"ok": True})
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
-# Vercel ke liye handler (ye line zaroori hai)
+# Vercel ke liye handler
 def handler(request):
     return app(request.environ, start_response)
