@@ -1,9 +1,10 @@
+# ✅ UPDATED bot.py / api/index.py (rk-mines-bot.vercel.app ke liye)
 from flask import Flask, request, jsonify
 import requests
 
-BOT_TOKEN = "8949298635:AAEY8_h8CWXv5Xrcls5_OLGUIpfXKYB3gd8"   # ⬅️ नया टोकन
-GAME_URL = "https://cryptomines.vercel.app"
-PHOTO_URL = "https://cryptomines.vercel.app/bomber.jpeg"       # ⬅️ bomber.jpeg इमेज
+BOT_TOKEN = "8949298635:AAEY8_h8CWXv5Xrcls5_OLGUIpfXKYB3gd8"
+GAME_URL = "https://cryptomines.vercel.app"                    # ⬅️ game front‑end (same)
+PHOTO_URL = "https://rk-mines-bot.vercel.app/bomber.jpeg"     # ⬅️ bomber.jpeg apne bot repo mein
 TELEGRAM_API = f"https://api.telegram.org/bot{BOT_TOKEN}"
 
 app = Flask(__name__)
@@ -17,9 +18,7 @@ def webhook():
         text = (msg.get("text") or "").strip()
 
         if text == "/start" and chat_id:
-            # ═══════════════════════════════════════
-            # 1. PREMIUM PHOTO with stylish caption
-            # ═══════════════════════════════════════
+            # ── 1. PREMIUM PHOTO ──
             photo_caption = (
                 "💥 **RK | CASH MINES** 💥\n"
                 "▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔\n"
@@ -39,9 +38,7 @@ def webhook():
                 "parse_mode": "Markdown"
             })
 
-            # ═══════════════════════════════════════
-            # 2. SEPARATE MESSAGE with Game Button
-            # ═══════════════════════════════════════
+            # ── 2. GAME BUTTON ──
             premium_text = (
                 "🌟 **Ready to Play?** 🌟\n\n"
                 "Tap the glowing button below to launch **Cash Mines**.\n"
@@ -62,9 +59,7 @@ def webhook():
                 }
             })
 
-            # ═══════════════════════════════════════
-            # 3. CURRENCY AVAILABILITY STATUS
-            # ═══════════════════════════════════════
+            # ── 3. CURRENCY STATUS ──
             currency_info = (
                 "⚠️ **Filhaal (Currently) Only USDT (Default) Works!**\n\n"
                 "Baaki currencies jald aayengi (Coming Soon):\n"
@@ -87,6 +82,6 @@ def webhook():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
-# Vercel ke liye handler (optional, agar Vercel pe deploy karna ho to)
+# Vercel ke liye handler
 def handler(request):
     return app(request.environ, start_response)
