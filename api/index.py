@@ -1,10 +1,9 @@
-# ✅ UPDATED bot.py / api/index.py (rk-mines-bot.vercel.app ke liye)
 from flask import Flask, request, jsonify
 import requests
 
 BOT_TOKEN = "8949298635:AAEY8_h8CWXv5Xrcls5_OLGUIpfXKYB3gd8"
-GAME_URL = "https://cryptomines.vercel.app"                    # ⬅️ game front‑end (same)
-PHOTO_URL = "https://rk-mines-bot.vercel.app/bomber.jpeg"     # ⬅️ bomber.jpeg apne bot repo mein
+GAME_URL = "https://cryptomines.vercel.app"
+PHOTO_URL = "https://rk-mines-bot.vercel.app/bomber.jpeg"
 TELEGRAM_API = f"https://api.telegram.org/bot{BOT_TOKEN}"
 
 app = Flask(__name__)
@@ -38,7 +37,26 @@ def webhook():
                 "parse_mode": "Markdown"
             })
 
-            # ── 2. GAME BUTTON ──
+            # ── 2. CURRENCY AVAILABILITY (middle, in English) ──
+            currency_info = (
+                "⚠️ **Currently Only USDT (Default) Works!**\n\n"
+                "Other currencies coming soon:\n"
+                "🇺🇸 USD — Coming Soon\n"
+                "🇬🇧 GBP — Coming Soon\n"
+                "🇦🇺 AUD — Coming Soon\n"
+                "🇮🇳 INR — Coming Soon\n"
+                "🇵🇰 PKR — Coming Soon\n"
+                "🇲🇨 EUR (Monaco) — Coming Soon\n"
+                "🇪🇸 EUR (Spain) — Coming Soon\n\n"
+                "💡 *Please select **Default (USDT)** for deposit.*"
+            )
+            requests.post(f"{TELEGRAM_API}/sendMessage", json={
+                "chat_id": chat_id,
+                "text": currency_info,
+                "parse_mode": "Markdown"
+            })
+
+            # ── 3. GAME BUTTON (last) ──
             premium_text = (
                 "🌟 **Ready to Play?** 🌟\n\n"
                 "Tap the glowing button below to launch **Cash Mines**.\n"
@@ -57,25 +75,6 @@ def webhook():
                         "web_app": {"url": GAME_URL}
                     }]]
                 }
-            })
-
-            # ── 3. CURRENCY STATUS ──
-            currency_info = (
-                "⚠️ **Filhaal (Currently) Only USDT (Default) Works!**\n\n"
-                "Baaki currencies jald aayengi (Coming Soon):\n"
-                "🇺🇸 USD — Coming Soon\n"
-                "🇬🇧 GBP — Coming Soon\n"
-                "🇦🇺 AUD — Coming Soon\n"
-                "🇮🇳 INR — Coming Soon\n"
-                "🇵🇰 PKR — Coming Soon\n"
-                "🇲🇨 EUR (Monaco) — Coming Soon\n"
-                "🇪🇸 EUR (Spain) — Coming Soon\n\n"
-                "💡 *Deposit sirf **Default (USDT)** select karein.*"
-            )
-            requests.post(f"{TELEGRAM_API}/sendMessage", json={
-                "chat_id": chat_id,
-                "text": currency_info,
-                "parse_mode": "Markdown"
             })
 
         return jsonify({"ok": True})
