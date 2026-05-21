@@ -37,23 +37,26 @@ def webhook():
                 "parse_mode": "Markdown"
             })
 
-            # ── 2. COUNTRY SUPPORT INFO (NEW) ──
+            # ── 2. COUNTRY INFO ──
             country_info = (
-                "🌍 **Now Supporting 8 Countries!** 🌍\n\n"
-                "We've crafted unique, premium layouts for these gambling‑loving nations:\n\n"
-                "🇺🇸 **United States**\n"
-                "🇬🇧 **United Kingdom**\n"
-                "🇦🇺 **Australia**\n"
-                "🇮🇳 **India**\n"
-                "🇵🇰 **Pakistan**\n"
-                "🇲🇨 **Monaco**\n"
-                "🇪🇸 **Spain**\n"
-                "🇫🇷 **France**\n\n"
-                "These countries are known for their massive gambling culture — "
-                "that's why we built a dedicated design & layout for each one. 🎨\n\n"
-                "💡 *Don't see your country yet?*\n"
-                "The more you play, the faster we add new countries. "
-                "Keep grinding, invite your friends, and your flag might be next! 🚀\n\n"
+                "🌍 **Default = Everyone Plays!** 🌍\n\n"
+                "The **Default** section is your universal entry — no matter where you are "
+                "in the world, you can jump in, deposit USDT, and start mining gems. 💎\n\n"
+                "🎨 **Custom Layouts for 8 Countries**\n"
+                "We built stunning, dedicated designs for 8 gambling powerhouses:\n"
+                "🇺🇸 United States\n"
+                "🇬🇧 United Kingdom\n"
+                "🇦🇺 Australia\n"
+                "🇮🇳 India\n"
+                "🇵🇰 Pakistan\n"
+                "🇲🇨 Monaco\n"
+                "🇪🇸 Spain\n"
+                "🇫🇷 France\n\n"
+                "These nations live & breathe gambling — that's why they've earned their "
+                "own premium look inside the game. 🏆\n\n"
+                "💡 *Want your country's flag in the game?*\n"
+                "Play more, invite your squad, and show us your volume. "
+                "The more you grind, the faster your country gets its own design. 🚀\n\n"
                 "⚡ _RK | CASH MINES — Built for Winners_"
             )
             requests.post(f"{TELEGRAM_API}/sendMessage", json={
