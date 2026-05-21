@@ -37,26 +37,32 @@ def webhook():
                 "parse_mode": "Markdown"
             })
 
-            # ── 2. CURRENCY AVAILABILITY (middle, in English) ──
-            currency_info = (
-                "⚠️ **Currently Only USDT (Default) Works!**\n\n"
-                "Other currencies coming soon:\n"
-                "🇺🇸 USD — Coming Soon\n"
-                "🇬🇧 GBP — Coming Soon\n"
-                "🇦🇺 AUD — Coming Soon\n"
-                "🇮🇳 INR — Coming Soon\n"
-                "🇵🇰 PKR — Coming Soon\n"
-                "🇲🇨 EUR (Monaco) — Coming Soon\n"
-                "🇪🇸 EUR (Spain) — Coming Soon\n\n"
-                "💡 *Please select **Default (USDT)** for deposit.*"
+            # ── 2. COUNTRY SUPPORT INFO (NEW) ──
+            country_info = (
+                "🌍 **Now Supporting 8 Countries!** 🌍\n\n"
+                "We've crafted unique, premium layouts for these gambling‑loving nations:\n\n"
+                "🇺🇸 **United States**\n"
+                "🇬🇧 **United Kingdom**\n"
+                "🇦🇺 **Australia**\n"
+                "🇮🇳 **India**\n"
+                "🇵🇰 **Pakistan**\n"
+                "🇲🇨 **Monaco**\n"
+                "🇪🇸 **Spain**\n"
+                "🇫🇷 **France**\n\n"
+                "These countries are known for their massive gambling culture — "
+                "that's why we built a dedicated design & layout for each one. 🎨\n\n"
+                "💡 *Don't see your country yet?*\n"
+                "The more you play, the faster we add new countries. "
+                "Keep grinding, invite your friends, and your flag might be next! 🚀\n\n"
+                "⚡ _RK | CASH MINES — Built for Winners_"
             )
             requests.post(f"{TELEGRAM_API}/sendMessage", json={
                 "chat_id": chat_id,
-                "text": currency_info,
+                "text": country_info,
                 "parse_mode": "Markdown"
             })
 
-            # ── 3. GAME BUTTON (last) ──
+            # ── 3. GAME BUTTON ──
             premium_text = (
                 "🌟 **Ready to Play?** 🌟\n\n"
                 "Tap the glowing button below to launch **Cash Mines**.\n"
